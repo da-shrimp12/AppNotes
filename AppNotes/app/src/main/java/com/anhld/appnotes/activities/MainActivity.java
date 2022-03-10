@@ -40,7 +40,10 @@ import java.util.List;
 public class MainActivity extends Activity implements NotesListener {
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+
     public static final int REQUEST_CODE_ADD_NOTE = 1;
+    public static final int REQUEST_CODE_OCR_TEXT = 6;
     public static final int REQUEST_CODE_UPDATE_NOTE = 2;
     public static final int REQUEST_CODE_SHOW_NOTES = 3;
     public static final int REQUEST_CODE_SELECT_IMAGE = 4;
@@ -94,8 +97,8 @@ public class MainActivity extends Activity implements NotesListener {
             }
         });
 
-        findViewById(R.id.imageAddNote).setOnClickListener(v -> startActivityForResult(
-                new Intent(getApplicationContext(), CreateNoteActivity.class), REQUEST_CODE_ADD_NOTE));
+        findViewById(R.id.imageOCRText).setOnClickListener(v -> startActivityForResult(
+                new Intent(getApplicationContext(), OCRTextActivity.class), REQUEST_CODE_OCR_TEXT));
 
         findViewById(R.id.imageAddImage).setOnClickListener(v -> {
             if (ContextCompat.checkSelfPermission(getApplicationContext(),
@@ -107,7 +110,8 @@ public class MainActivity extends Activity implements NotesListener {
             }
         });
 
-        findViewById(R.id.imageAddNote).setOnClickListener(v -> showAddURLDialog());
+        findViewById(R.id.imageAddWebLink).setOnClickListener(v -> showAddURLDialog());
+
     }
 
     @SuppressLint("QueryPermissionsNeeded")
@@ -254,4 +258,5 @@ public class MainActivity extends Activity implements NotesListener {
         }
         dialogAddURL.show();
     }
+
 }
