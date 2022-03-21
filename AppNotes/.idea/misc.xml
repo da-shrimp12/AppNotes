@@ -5,14 +5,24 @@
       <map>
         <entry key="app/src/main/res/drawable/background_add_button.xml" value="0.1885" />
         <entry key="app/src/main/res/drawable/background_delete.xml" value="0.1885" />
-        <entry key="app/src/main/res/layout/activity_create_note.xml" value="0.3729166666666667" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.35885416666666664" />
-        <entry key="app/src/main/res/layout/activity_ocr_text.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/background_splash.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_bscanner.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_create_note.xml" value="0.26865671641791045" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_ocr_text.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_ocrtext.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/layout/activity_speech_to_text.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.24094202898550723" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_o_c_r_text.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_read_file.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_speech_to_text.xml" value="0.22282608695652173" />
         <entry key="app/src/main/res/layout/item_container_note.xml" value="0.3729166666666667" />
         <entry key="app/src/main/res/layout/layout_add_url.xml" value="0.3729166666666667" />
         <entry key="app/src/main/res/layout/layout_delete_note.xml" value="0.3729166666666667" />
+        <entry key="app/src/main/res/layout/layout_header_nav.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_miscellaneous.xml" value="0.3729166666666667" />
+        <entry key="app/src/main/res/menu/menu_nav.xml" value="0.1" />
       </map>
     </option>
   </component>

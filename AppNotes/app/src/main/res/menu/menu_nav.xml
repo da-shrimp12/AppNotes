@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_home"
+            android:title="@string/nav_home"
+            android:icon="@drawable/ic_home"/>
+
+        <item android:id="@+id/nav_scan"
+            android:title="@string/nav_ocr"
+            android:icon="@drawable/ic_scanner"/>
+
+        <item android:id="@+id/nav_mic"
+            android:title="@string/nav_speak_text"
+            android:icon="@drawable/ic_mic"/>
+
+        <item android:id="@+id/nav_pdf"
+            android:title="@string/read_pdf_file"
+            android:icon="@drawable/ic_pdf"/>
+    </group>
+
+    <item android:title="About app">
+        <menu>
+            <item android:id="@+id/about"
+                android:title="@string/about"
+                android:icon="@drawable/splash"/>
+        </menu>
+    </item>
+
+</menu>

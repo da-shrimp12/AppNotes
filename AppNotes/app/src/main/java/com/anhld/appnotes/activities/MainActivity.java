@@ -15,16 +15,22 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -33,14 +39,13 @@ import com.anhld.appnotes.adapters.NotesAdapter;
 import com.anhld.appnotes.databases.NotesDatabase;
 import com.anhld.appnotes.entities.Note;
 import com.anhld.appnotes.listeners.NotesListener;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity implements NotesListener {
-    private static final String TAG = MainActivity.class.getSimpleName();
-
-    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+public class MainActivity extends AppCompatActivity implements NotesListener, NavigationView.OnNavigationItemSelectedListener {
+//    private static final String TAG = MainActivity.class.getSimpleName();
 
     public static final int REQUEST_CODE_ADD_NOTE = 1;
     public static final int REQUEST_CODE_OCR_TEXT = 6;
@@ -57,16 +62,33 @@ public class MainActivity extends Activity implements NotesListener {
 
     private AlertDialog dialogAddURL;
 
+    private DrawerLayout mDrawerLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //event for drawer
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.string.navagation_drawer_open, R.string.navagation_drawer_close);
+
+        mDrawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
+
+        //add note
         ImageView imageAddNoteMain = findViewById(R.id.imageAddNoteMain);
         imageAddNoteMain.setOnClickListener(v -> startActivityForResult(
                 new Intent(getApplicationContext(), CreateNoteActivity.class), REQUEST_CODE_ADD_NOTE)
         );
 
+        //set adapter
         notesRecyclerView = findViewById(R.id.notesRecyclerView);
         notesRecyclerView.setLayoutManager(
                 new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
@@ -77,11 +99,13 @@ public class MainActivity extends Activity implements NotesListener {
 
         getNotes(REQUEST_CODE_SHOW_NOTES, false);
 
+        //event for search
         EditText inputSearch = findViewById(R.id.inputSearch);
+
         inputSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                hideSoftKeyboard();
             }
 
             @Override
@@ -95,6 +119,7 @@ public class MainActivity extends Activity implements NotesListener {
                     notesAdapter.searchNotes(s.toString());
                 }
             }
+
         });
 
         findViewById(R.id.imageOCRText).setOnClickListener(v -> startActivityForResult(
@@ -257,6 +282,48 @@ public class MainActivity extends Activity implements NotesListener {
             view.findViewById(R.id.textCancel).setOnClickListener(v -> dialogAddURL.dismiss());
         }
         dialogAddURL.show();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.nav_home) {
+            recreate();
+        } else if (id == R.id.nav_mic) {
+            redirectActivity(this,SpeechToTextActivity.class);
+        } else if (id == R.id.nav_pdf) {
+            redirectActivity(this,ReadPDFActivity.class);
+        } else if (id == R.id.nav_scan) {
+            redirectActivity(this,OCRTextActivity.class);
+        } else if (id == R.id.about) {
+            redirectActivity(this,AboutActivity.class);
+        }
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    private void redirectActivity(Activity mActivity, Class mClass) {
+        Intent intent = new Intent(mActivity,mClass);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mActivity.startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    public void hideSoftKeyboard() {
+        try {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
