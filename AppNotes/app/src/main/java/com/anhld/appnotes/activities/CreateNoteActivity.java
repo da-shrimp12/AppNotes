@@ -2,7 +2,8 @@ package com.anhld.appnotes.activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -18,11 +19,12 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,6 +41,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -62,6 +65,8 @@ public class CreateNoteActivity extends AppCompatActivity {
     private AlertDialog dialogDeleteNote;
 
     private Note alreadyAvailableNote;
+
+    private String timeToNotify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -315,7 +320,7 @@ public class CreateNoteActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteActivity.this);
             View view = LayoutInflater.from(this).inflate(
                     R.layout.layout_delete_note,
-                    (ViewGroup) findViewById(R.id.layoutDeleteNoteContainer)
+                    findViewById(R.id.layoutDeleteNoteContainer)
             );
             builder.setView(view);
             dialogDeleteNote = builder.create();
@@ -357,6 +362,60 @@ public class CreateNoteActivity extends AppCompatActivity {
         GradientDrawable gradientDrawable = (GradientDrawable) viewSubtitleIndicator.getBackground();
         gradientDrawable.setColor(Color.parseColor(selectedNoteColor));
     }
+
+
+    private void selectTime() {
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                timeToNotify = i + ":" + i1;
+//setText(formatTime(i,i1));
+
+            }
+        }, hour, minute, true);
+        timePickerDialog.show();
+    }
+
+    public String formatTime(int hour, int minute) {
+        String time;
+        String formattedMinute;
+
+        if (minute / 10 == 0) {
+            formattedMinute = "0" + minute;
+        } else {
+            formattedMinute = "" + minute;
+        }
+
+        if (hour == 0) {
+            time = "12" + ":" + formattedMinute + "AM";
+        } else if (hour < 12) {
+            time = hour + ":" + formattedMinute + "AM";
+        } else if (hour == 12) {
+            time = "12" + ":" + formattedMinute + "PM";
+        } else {
+            int temp = hour - 12;
+            time = temp + ":" + formattedMinute + "PM";
+        }
+        return time;
+    }
+
+    private void selectDate() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                //btnDate.setText(day+"-"+month+1 +"-"+year);
+            }
+        },year,month,day);
+
+    }
+
 
     @SuppressLint("QueryPermissionsNeeded")
     private void selectImage() {

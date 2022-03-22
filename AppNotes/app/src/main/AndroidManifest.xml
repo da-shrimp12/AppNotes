@@ -17,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/FullScreen">
+
         <activity
             android:name=".activities.SpeechToTextActivity"
             android:exported="false" />

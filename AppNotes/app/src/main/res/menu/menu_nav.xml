@@ -19,7 +19,7 @@
             android:icon="@drawable/ic_pdf"/>
     </group>
 
-    <item android:title="About app">
+    <item android:title="More">
         <menu>
             <item android:id="@+id/about"
                 android:title="@string/about"
