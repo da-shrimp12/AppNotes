@@ -99,15 +99,12 @@ public class MainActivity extends AppCompatActivity implements NotesListener, Na
 
         getNotes(REQUEST_CODE_SHOW_NOTES, false);
 
-        hideSoftKeyboard();
-
         //event for search
         EditText inputSearch = findViewById(R.id.inputSearch);
 
         inputSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                hideSoftKeyboard();
             }
 
             @Override

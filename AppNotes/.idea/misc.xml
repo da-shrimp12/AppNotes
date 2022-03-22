@@ -29,6 +29,8 @@
         <entry key="app/src/main/res/layout/layout_miscellaneous.xml" value="0.3729166666666667" />
         <entry key="app/src/main/res/layout/notification_layout.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_nav.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.175" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.175" />
       </map>
     </option>
   </component>
