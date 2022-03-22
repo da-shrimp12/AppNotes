@@ -1,5 +1,6 @@
 package com.anhld.appnotes.adapters;
 
+import android.app.Activity;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -8,6 +9,7 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -126,6 +128,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
                 new Handler(Looper.getMainLooper()).post(() -> notifyDataSetChanged());
             }
         }, 500);
+
     }
 
     public void cancelTimer() {
