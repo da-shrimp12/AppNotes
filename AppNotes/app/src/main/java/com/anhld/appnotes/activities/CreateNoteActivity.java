@@ -2,6 +2,7 @@ package com.anhld.appnotes.activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
@@ -21,6 +22,7 @@ import android.provider.MediaStore;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -150,8 +152,6 @@ public class CreateNoteActivity extends AppCompatActivity {
         inputNoteSubtitle.setText(alreadyAvailableNote.getSubtitle());
         inputNoteText.setText(alreadyAvailableNote.getNoteText());
         textDateTime.setText(alreadyAvailableNote.getDateTime());
-        btnTime.setText(alreadyAvailableNote.getEventTime());
-        btnDate.setText(alreadyAvailableNote.getEventDate());
 
         final String imagePathStr = alreadyAvailableNote.getImagePath();
         if (imagePathStr != null && !imagePathStr.trim().isEmpty()) {
@@ -177,8 +177,8 @@ public class CreateNoteActivity extends AppCompatActivity {
         String time = (btnTime.getText().toString().trim());
 
         if (!btnTime.getText().toString().equals("Pick Time") || !btnDate.getText().toString().equals("Pick Date")) {
-            Toast.makeText(this, "Reminder successfully!!!", Toast.LENGTH_SHORT).show();
             setAlarm(noteTitle, date, time);
+            Toast.makeText(this,"Alarm set at " + date + " on " + time + " successfully",Toast.LENGTH_LONG).show();
         }
 
         if (noteTitle.isEmpty()) {
@@ -226,6 +226,17 @@ public class CreateNoteActivity extends AppCompatActivity {
         }
 
         new SaveNoteTask().execute();
+
+        hideSoftKeyboard();
+    }
+
+    public void hideSoftKeyboard() {
+        try {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void initMiscellaneous() {

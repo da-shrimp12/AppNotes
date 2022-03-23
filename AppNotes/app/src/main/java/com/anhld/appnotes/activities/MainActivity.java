@@ -323,15 +323,4 @@ public class MainActivity extends AppCompatActivity implements NotesListener, Na
         }
     }
 
-
-    public void hideSoftKeyboard() {
-        try {
-            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-        } catch (NullPointerException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-
 }
