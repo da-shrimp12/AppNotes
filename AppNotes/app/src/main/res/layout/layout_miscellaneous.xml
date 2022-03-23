@@ -154,7 +154,7 @@
             android:layout_width="@dimen/_22sdp"
             android:layout_height="@dimen/_22sdp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_color_lens_black_24dp"
+            android:src="@drawable/ic_draw"
             app:tint="@color/colorIcons" />
 
         <TextView

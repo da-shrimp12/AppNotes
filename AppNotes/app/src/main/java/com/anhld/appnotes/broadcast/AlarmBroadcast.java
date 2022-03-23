@@ -17,7 +17,7 @@ import androidx.core.app.NotificationCompat;
 import com.anhld.appnotes.R;
 import com.anhld.appnotes.activities.NotificationMessage;
 
-public class AlarmBrodcast extends BroadcastReceiver {
+public class AlarmBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();

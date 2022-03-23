@@ -112,6 +112,15 @@
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_scanner"
                 app:tint="@color/colorIcons" />
+
+            <ImageView
+                android:id="@+id/imageDraw"
+                android:layout_width="@dimen/_23sdp"
+                android:layout_height="@dimen/_23sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_draw"
+                app:tint="@color/colorIcons" />
         </LinearLayout>
 
         <ImageView

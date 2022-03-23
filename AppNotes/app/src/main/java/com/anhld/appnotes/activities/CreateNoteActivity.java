@@ -38,7 +38,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.anhld.appnotes.R;
-import com.anhld.appnotes.broadcast.AlarmBrodcast;
+import com.anhld.appnotes.broadcast.AlarmBroadcast;
 import com.anhld.appnotes.databases.NotesDatabase;
 import com.anhld.appnotes.entities.Note;
 import com.bumptech.glide.Glide;
@@ -150,6 +150,8 @@ public class CreateNoteActivity extends AppCompatActivity {
         inputNoteSubtitle.setText(alreadyAvailableNote.getSubtitle());
         inputNoteText.setText(alreadyAvailableNote.getNoteText());
         textDateTime.setText(alreadyAvailableNote.getDateTime());
+        btnTime.setText(alreadyAvailableNote.getEventTime());
+        btnDate.setText(alreadyAvailableNote.getEventDate());
 
         final String imagePathStr = alreadyAvailableNote.getImagePath();
         if (imagePathStr != null && !imagePathStr.trim().isEmpty()) {
@@ -171,6 +173,13 @@ public class CreateNoteActivity extends AppCompatActivity {
         final String noteSubtitle = inputNoteSubtitle.getText().toString().trim();
         final String noteText = inputNoteText.getText().toString().trim();
         final String dateTimeStr = textDateTime.getText().toString().trim();
+        String date = (btnDate.getText().toString().trim());
+        String time = (btnTime.getText().toString().trim());
+
+        if (!btnTime.getText().toString().equals("Pick Time") || !btnDate.getText().toString().equals("Pick Date")) {
+            Toast.makeText(this, "Reminder successfully!!!", Toast.LENGTH_SHORT).show();
+            setAlarm(noteTitle, date, time);
+        }
 
         if (noteTitle.isEmpty()) {
             Toast.makeText(this, "Note title can't be empty!", Toast.LENGTH_SHORT).show();
@@ -187,6 +196,8 @@ public class CreateNoteActivity extends AppCompatActivity {
         note.setDateTime(dateTimeStr);
         note.setColor(selectedNoteColor);
         note.setImagePath(selectedImagePath);
+        note.setEventDate(date);
+        note.setEventTime(time);
 
         if (layoutWebURL.getVisibility() == View.VISIBLE) {
             note.setWebLink(textWebURL.getText().toString());
@@ -431,7 +442,7 @@ public class CreateNoteActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                btnDate.setText(day + "-" + month + 1 + "-" + year);
+                btnDate.setText(day + "-" + (month + 1) + "-" + year);
             }
         }, year, month, day);
         datePickerDialog.show();
@@ -466,10 +477,6 @@ public class CreateNoteActivity extends AppCompatActivity {
                 Uri selectedImageUri = data.getData();
                 if (selectedImageUri != null) {
                     try {
-//                        InputStream inputStream = getContentResolver().openInputStream(selectedImageUri);
-//                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-//                        imageNote.setImageBitmap(bitmap);
-
                         Glide.with(CreateNoteActivity.this)
                                 .load(selectedImageUri)
                                 .into(imageNote);
@@ -537,14 +544,14 @@ public class CreateNoteActivity extends AppCompatActivity {
     private void setAlarm(String text, String date, String time) {
         AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-        Intent intent = new Intent(getApplicationContext(), AlarmBrodcast.class);
+        Intent intent = new Intent(getApplicationContext(), AlarmBroadcast.class);
         intent.putExtra("event", text);
         intent.putExtra("time", date);
         intent.putExtra("date", time);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
         String dateandtime = date + " " + timeToNotify;
-        DateFormat formatter = new SimpleDateFormat("d-M-yyyy hh:mm");
+        @SuppressLint("SimpleDateFormat") DateFormat formatter = new SimpleDateFormat("d-M-yyyy hh:mm");
         try {
             Date date1 = formatter.parse(dateandtime);
             am.set(AlarmManager.RTC_WAKEUP, date1.getTime(), pendingIntent);

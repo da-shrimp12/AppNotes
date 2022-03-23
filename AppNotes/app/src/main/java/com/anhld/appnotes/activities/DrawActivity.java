@@ -113,6 +113,9 @@ public class DrawActivity extends AppCompatActivity implements View.OnClickListe
         ImageButton redoButton = findViewById(R.id.redoButton);
         redoButton.setOnClickListener(this);
 
+        ImageButton goHomeButton = findViewById(R.id.goHomeButton);
+        goHomeButton.setOnClickListener(this);
+
         ImageButton styleButton = findViewById(R.id.styleButton);
         styleButton.setOnClickListener(this);
 
@@ -268,6 +271,11 @@ public class DrawActivity extends AppCompatActivity implements View.OnClickListe
         } else if (viewID == R.id.redoButton) {
             // redraw the most recently undone action
             canvasView.redo();
+        } else if (viewID == R.id.goHomeButton) {
+            Intent i = new Intent(DrawActivity.this,
+                    MainActivity.class);
+            //Intent is used to switch from one activity to another.
+            startActivity(i);
         } else if (viewID == R.id.styleButton) {
             // generate a new ColourPickerDialog to allow the user to change colour
             ColourPickerDialog dialog = new ColourPickerDialog(DrawActivity.this, canvasView.getColour());

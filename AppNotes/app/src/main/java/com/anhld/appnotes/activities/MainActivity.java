@@ -121,6 +121,13 @@ public class MainActivity extends AppCompatActivity implements NotesListener, Na
 
         });
 
+        findViewById(R.id.imageDraw).setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this,
+                    DrawActivity.class);
+            //Intent is used to switch from one activity to another.
+            startActivity(i);
+        });
+
         findViewById(R.id.imageOCRText).setOnClickListener(v -> startActivityForResult(
                 new Intent(getApplicationContext(), OCRTextActivity.class), REQUEST_CODE_OCR_TEXT));
 

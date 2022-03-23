@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/drawable/background_splash.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/circle_button.xml" value="0.162" />
         <entry key="app/src/main/res/drawable/ic_bscanner.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_color_lens_black_24dp.xml" value="0.162" />
         <entry key="app/src/main/res/drawable/ic_done_black_24dp.xml" value="0.162" />
         <entry key="app/src/main/res/layout-w1240dp/notification_layout.xml" value="0.23025435073627845" />
         <entry key="app/src/main/res/layout-w936dp/activity_colour_picker_dialog.xml" value="0.19140625" />
@@ -18,7 +19,7 @@
         <entry key="app/src/main/res/layout/activity_create_event.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/layout/activity_create_note.xml" value="0.26865671641791045" />
         <entry key="app/src/main/res/layout/activity_document.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_draw.xml" value="0.2552083333333333" />
+        <entry key="app/src/main/res/layout/activity_draw.xml" value="0.4295842488606771" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_notification_message.xml" value="0.2644927536231884" />
         <entry key="app/src/main/res/layout/activity_notifycation.xml" value="0.35833333333333334" />

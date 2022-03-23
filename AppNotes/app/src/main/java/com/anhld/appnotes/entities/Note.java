@@ -34,11 +34,11 @@ public class Note implements Serializable {
     @ColumnInfo(name = "webLink")
     private String webLink;
 
-//    @ColumnInfo(name = "eventDate")
-//    private String eventDate;
-//
-//    @ColumnInfo(name = "eventTime")
-//    private String eventTime;
+    @ColumnInfo(name = "eventDate")
+    private String eventDate;
+
+    @ColumnInfo(name = "eventTime")
+    private String eventTime;
 
     public int getId() {
         return id;
@@ -104,21 +104,21 @@ public class Note implements Serializable {
         this.webLink = webLink;
     }
 
-//    public String getEventDate() {
-//        return eventDate;
-//    }
-//
-//    public void setEventDate(String eventDate) {
-//        this.eventDate = eventDate;
-//    }
-//
-//    public String getEventTime() {
-//        return eventTime;
-//    }
-//
-//    public void setEventTime(String eventTime) {
-//        this.eventTime = eventTime;
-//    }
+    public String getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    public String getEventTime() {
+        return eventTime;
+    }
+
+    public void setEventTime(String eventTime) {
+        this.eventTime = eventTime;
+    }
 
     @NonNull
     @Override

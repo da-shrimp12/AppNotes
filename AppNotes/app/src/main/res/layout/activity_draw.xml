@@ -23,10 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/circle_button"
         app:layout_constraintBottom_toBottomOf="@+id/canvasView"
         app:layout_constraintStart_toStartOf="@+id/canvasView"
-        app:srcCompat="@drawable/ic_save_black_24dp"
-        android:background="@drawable/circle_button" />
+        app:srcCompat="@drawable/ic_save_black_24dp" />
 
     <ImageButton
         android:id="@+id/clearButton"
@@ -34,10 +34,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/circle_button"
         app:layout_constraintStart_toStartOf="@+id/canvasView"
         app:layout_constraintTop_toTopOf="@+id/canvasView"
-        app:srcCompat="@drawable/ic_clear_all_black_24dp"
-        android:background="@drawable/circle_button" />
+        app:srcCompat="@drawable/ic_clear_all_black_24dp" />
 
     <ImageButton
         android:id="@+id/shareButton"
@@ -45,10 +45,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/circle_button"
         app:layout_constraintBottom_toBottomOf="@+id/canvasView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_share_black_24dp"
-        android:background="@drawable/circle_button" />
+        app:srcCompat="@drawable/ic_share_black_24dp" />
 
     <ImageButton
         android:id="@+id/undoButton"
@@ -56,10 +56,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/circle_button"
         app:layout_constraintStart_toEndOf="@+id/clearButton"
         app:layout_constraintTop_toTopOf="@+id/canvasView"
-        app:srcCompat="@drawable/ic_undo_black_24dp"
-        android:background="@drawable/circle_button" />
+        app:srcCompat="@drawable/ic_undo_black_24dp" />
 
     <ImageButton
         android:id="@+id/redoButton"
@@ -67,10 +67,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/circle_button"
         app:layout_constraintStart_toEndOf="@+id/undoButton"
         app:layout_constraintTop_toTopOf="@+id/canvasView"
-        app:srcCompat="@drawable/ic_redo_black_24dp"
-        android:background="@drawable/circle_button" />
+        app:srcCompat="@drawable/ic_redo_black_24dp" />
+
+    <ImageButton
+        android:id="@+id/goHomeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/circle_button"
+        app:layout_constraintStart_toEndOf="@+id/redoButton"
+        app:layout_constraintTop_toTopOf="@+id/canvasView"
+        app:srcCompat="@drawable/ic_home" />
 
     <ImageButton
         android:id="@+id/styleButton"
@@ -78,10 +89,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:background="@drawable/circle_button"
         app:layout_constraintEnd_toEndOf="@+id/canvasView"
         app:layout_constraintTop_toTopOf="@+id/canvasView"
-        app:srcCompat="@drawable/ic_color_lens_black_24dp"
-        android:background="@drawable/circle_button" />
+        app:srcCompat="@drawable/ic_color_lens_black_24dp" />
 
     <ImageView
         android:id="@+id/penSizeIcon"
@@ -93,5 +104,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -55,7 +55,7 @@ public class SpeechToTextActivity extends AppCompatActivity implements Navigatio
             recordSpeech();
         });
 
-        Toast.makeText(this, "Press icon mic to Speech to Text", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Press icon mic to Speech to Text", Toast.LENGTH_SHORT).show();
     }
 
 
