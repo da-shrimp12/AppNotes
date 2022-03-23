@@ -33,7 +33,7 @@ public class StorageRationaleDialog extends Dialog implements View.OnClickListen
         if (window != null)
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         // set the resource to be used for the dialog
-        super.setContentView(R.layout.activity_storage_rationale_dialog);
+        super.setContentView(R.layout.storage_rationale_dialog);
         super.setCancelable(false);
         // Initialise the buttons
         Button buttonCancel = findViewById(R.id.buttonCancel);

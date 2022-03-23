@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.anhld.appnotes.R;
@@ -43,7 +44,7 @@ public class ColourPickerDialog extends Dialog implements View.OnClickListener {
         if (window != null)
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         // set the resource to be used for the dialog
-        super.setContentView(R.layout.activity_colour_picker_dialog);
+        super.setContentView(R.layout.color_picker_dialog);
         super.setCancelable(true);
         // Assign variables to the three rows of colour buttons
         LinearLayout colourColumn1 = findViewById(R.id.columnLayout1);
