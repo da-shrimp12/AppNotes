@@ -1,20 +1,20 @@
 package com.anhld.appnotes.activities;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.anhld.appnotes.R;
 import com.google.android.material.navigation.NavigationView;
 
-public class AboutActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class AboutActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
 
@@ -41,13 +41,13 @@ public class AboutActivity extends AppCompatActivity implements NavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.nav_home) {
-            redirectActivity(this,MainActivity.class);
+            redirectActivity(this, MainActivity.class);
         } else if (id == R.id.nav_mic) {
-            redirectActivity(this,SpeechToTextActivity.class);
+            redirectActivity(this, SpeechToTextActivity.class);
         } else if (id == R.id.nav_pdf) {
-            redirectActivity(this,ReadPDFActivity.class);
+            redirectActivity(this, ReadPDFActivity.class);
         } else if (id == R.id.nav_scan) {
-            redirectActivity(this,OCRTextActivity.class);
+            redirectActivity(this, OCRTextActivity.class);
         } else if (id == R.id.about) {
             recreate();
         }
@@ -56,7 +56,7 @@ public class AboutActivity extends AppCompatActivity implements NavigationView.O
     }
 
     private void redirectActivity(Activity mActivity, Class mClass) {
-        Intent intent = new Intent(mActivity,mClass);
+        Intent intent = new Intent(mActivity, mClass);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mActivity.startActivity(intent);
     }

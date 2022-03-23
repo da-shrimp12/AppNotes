@@ -35,6 +35,15 @@
     <string name="nav_speak_text">Speech to text</string>
     <string name="read_pdf_file">Read PDF file</string>
     <string name="about">About</string>
+
+    <string name="colour_picker_header">Choose a colour</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_select">Select</string>
+
+    <string name="rationale_header">Permission required</string>
+    <string name="text_description">Storage access is needed to save or share images.</string>
+    <string name="button_allow">Allow</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="draw">Draw</string>
 </resources>

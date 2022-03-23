@@ -1,9 +1,9 @@
 package com.anhld.appnotes.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.anhld.appnotes.R;
 import com.github.barteksc.pdfviewer.PDFView;
@@ -13,6 +13,7 @@ import java.io.File;
 public class DocumentActivity extends AppCompatActivity {
 
     String filePath = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

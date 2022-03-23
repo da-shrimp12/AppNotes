@@ -1,6 +1,5 @@
 package com.anhld.appnotes.adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

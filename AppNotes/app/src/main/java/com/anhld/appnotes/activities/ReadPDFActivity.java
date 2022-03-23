@@ -103,7 +103,7 @@ public class ReadPDFActivity extends AppCompatActivity implements NavigationView
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         pdfList = new ArrayList<>();
         pdfList.addAll(findPdf(Environment.getExternalStorageDirectory()));
-        pdfAdapter = new PdfAdapter(this,pdfList,this);
+        pdfAdapter = new PdfAdapter(this, pdfList, this);
         recyclerView.setAdapter(pdfAdapter);
     }
 
@@ -142,7 +142,7 @@ public class ReadPDFActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public void onPdfSelected(File file) {
-        startActivity(new Intent(ReadPDFActivity.this,DocumentActivity.class)
-        .putExtra("path",file.getAbsolutePath()));
+        startActivity(new Intent(ReadPDFActivity.this, DocumentActivity.class)
+                .putExtra("path", file.getAbsolutePath()));
     }
 }

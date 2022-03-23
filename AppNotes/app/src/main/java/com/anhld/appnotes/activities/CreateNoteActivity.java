@@ -2,8 +2,11 @@ package com.anhld.appnotes.activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -18,7 +21,7 @@ import android.provider.MediaStore;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,11 +38,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.anhld.appnotes.R;
+import com.anhld.appnotes.broadcast.AlarmBrodcast;
 import com.anhld.appnotes.databases.NotesDatabase;
 import com.anhld.appnotes.entities.Note;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -54,6 +60,9 @@ public class CreateNoteActivity extends AppCompatActivity {
     private ImageView imageNote;
     private TextView textWebURL;
     private LinearLayout layoutWebURL;
+
+    private Button btnTime;
+    private Button btnDate;
 
     private String selectedNoteColor;
     private String selectedImagePath;
@@ -83,6 +92,8 @@ public class CreateNoteActivity extends AppCompatActivity {
         imageNote = findViewById(R.id.imageNote);
         textWebURL = findViewById(R.id.textWebURL);
         layoutWebURL = findViewById(R.id.layoutWebURL);
+        btnTime = findViewById(R.id.btnTime);
+        btnDate = findViewById(R.id.btnDate);
 
         textDateTime = findViewById(R.id.textDateTime);
         textDateTime.setText(new SimpleDateFormat(
@@ -126,6 +137,9 @@ public class CreateNoteActivity extends AppCompatActivity {
                 }
             }
         }
+
+        btnTime.setOnClickListener(view -> selectTime());
+        btnDate.setOnClickListener(view -> selectDate());
 
         initMiscellaneous();
         setSubtitleIndicatorColor();
@@ -290,6 +304,13 @@ public class CreateNoteActivity extends AppCompatActivity {
             }
         }
 
+        layoutMiscellaneous.findViewById(R.id.layoutDraw).setOnClickListener(v -> {
+            Intent i = new Intent(CreateNoteActivity.this,
+                    DrawActivity.class);
+            //Intent is used to switch from one activity to another.
+            startActivity(i);
+        });
+
         layoutMiscellaneous.findViewById(R.id.layoutAddImage).setOnClickListener(v -> {
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             if (ContextCompat.checkSelfPermission(getApplicationContext(),
@@ -372,10 +393,9 @@ public class CreateNoteActivity extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker timePicker, int i, int i1) {
                 timeToNotify = i + ":" + i1;
-//setText(formatTime(i,i1));
-
+                btnTime.setText(formatTime(i, i1));
             }
-        }, hour, minute, true);
+        }, hour, minute, false);
         timePickerDialog.show();
     }
 
@@ -408,12 +428,13 @@ public class CreateNoteActivity extends AppCompatActivity {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                //btnDate.setText(day+"-"+month+1 +"-"+year);
+                btnDate.setText(day + "-" + month + 1 + "-" + year);
             }
-        },year,month,day);
-
+        }, year, month, day);
+        datePickerDialog.show();
     }
 
 
@@ -511,6 +532,29 @@ public class CreateNoteActivity extends AppCompatActivity {
             view.findViewById(R.id.textCancel).setOnClickListener(v -> dialogAddURL.dismiss());
         }
         dialogAddURL.show();
+    }
+
+    private void setAlarm(String text, String date, String time) {
+        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        Intent intent = new Intent(getApplicationContext(), AlarmBrodcast.class);
+        intent.putExtra("event", text);
+        intent.putExtra("time", date);
+        intent.putExtra("date", time);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        String dateandtime = date + " " + timeToNotify;
+        DateFormat formatter = new SimpleDateFormat("d-M-yyyy hh:mm");
+        try {
+            Date date1 = formatter.parse(dateandtime);
+            am.set(AlarmManager.RTC_WAKEUP, date1.getTime(), pendingIntent);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        finish();
+
     }
 
 }

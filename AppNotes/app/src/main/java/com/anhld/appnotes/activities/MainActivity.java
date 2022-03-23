@@ -289,20 +289,20 @@ public class MainActivity extends AppCompatActivity implements NotesListener, Na
         if (id == R.id.nav_home) {
             recreate();
         } else if (id == R.id.nav_mic) {
-            redirectActivity(this,SpeechToTextActivity.class);
+            redirectActivity(this, SpeechToTextActivity.class);
         } else if (id == R.id.nav_pdf) {
-            redirectActivity(this,ReadPDFActivity.class);
+            redirectActivity(this, ReadPDFActivity.class);
         } else if (id == R.id.nav_scan) {
-            redirectActivity(this,OCRTextActivity.class);
+            redirectActivity(this, OCRTextActivity.class);
         } else if (id == R.id.about) {
-            redirectActivity(this,AboutActivity.class);
+            redirectActivity(this, AboutActivity.class);
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
     private void redirectActivity(Activity mActivity, Class mClass) {
-        Intent intent = new Intent(mActivity,mClass);
+        Intent intent = new Intent(mActivity, mClass);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mActivity.startActivity(intent);
     }
@@ -317,7 +317,7 @@ public class MainActivity extends AppCompatActivity implements NotesListener, Na
     }
 
 
-    public void hideSoftKeyboard () {
+    public void hideSoftKeyboard() {
         try {
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
