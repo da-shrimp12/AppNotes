@@ -49,6 +49,17 @@
             android:textAlignment="center"
             android:textSize="@dimen/_12ssp" />
 
+        <TextView
+            android:id="@+id/sendMail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Feedback: ducanhle0102@gmail.com "
+            android:textAlignment="center"
+            android:textSize="@dimen/_12ssp" />
+
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
