@@ -1,7 +1,9 @@
 package com.anhld.appnotes.activities;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.view.MenuItem;
@@ -13,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -25,6 +29,7 @@ public class SpeechToTextActivity extends AppCompatActivity implements Navigatio
 
     private DrawerLayout mDrawerLayout;
     private static final int RECOGNIZER_RESULT = 1;
+    private static final int MICROPHONE_PERMISSION_CODE = 200;
 
     ImageView speechButton;
     EditText edtSpeech;
@@ -52,12 +57,23 @@ public class SpeechToTextActivity extends AppCompatActivity implements Navigatio
         edtSpeech = findViewById(R.id.editText);
 
         speechButton.setOnClickListener(view -> {
-            recordSpeech();
+            getMicrophonePermission();
         });
 
         Toast.makeText(this, "Press icon mic to Speech to Text", Toast.LENGTH_SHORT).show();
+
+
     }
 
+    private  void getMicrophonePermission(){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)==
+                PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(this, new String[]
+                    {Manifest.permission.RECORD_AUDIO},MICROPHONE_PERMISSION_CODE);
+        }else {
+            recordSpeech();
+        }
+    }
 
     private void recordSpeech() {
         Intent speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);

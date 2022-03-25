@@ -56,7 +56,7 @@
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:layout_marginTop="@dimen/_20sdp"
-            android:text="Feedback: ducanhle0102@gmail.com "
+            android:text="Press to Feedback: ducanhle0102@gmail.com "
             android:textAlignment="center"
             android:textSize="@dimen/_12ssp" />
 

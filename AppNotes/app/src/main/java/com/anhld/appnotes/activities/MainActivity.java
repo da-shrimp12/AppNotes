@@ -40,6 +40,12 @@ import com.anhld.appnotes.databases.NotesDatabase;
 import com.anhld.appnotes.entities.Note;
 import com.anhld.appnotes.listeners.NotesListener;
 import com.google.android.material.navigation.NavigationView;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements NotesListener, Na
         notesAdapter = new NotesAdapter(noteList, this);
         notesRecyclerView.setAdapter(notesAdapter);
 
-        getNotes(REQUEST_CODE_SHOW_NOTES, false);
+//        getNotes(REQUEST_CODE_SHOW_NOTES, false);
 
         //event for search
         EditText inputSearch = findViewById(R.id.inputSearch);
@@ -143,6 +149,28 @@ public class MainActivity extends AppCompatActivity implements NotesListener, Na
 
         findViewById(R.id.imageAddWebLink).setOnClickListener(v -> showAddURLDialog());
 
+        runtimePermission();
+
+    }
+
+    private void runtimePermission() {
+        Dexter.withContext(MainActivity.this).withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                        getNotes(REQUEST_CODE_SHOW_NOTES, false);
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+                        Toast.makeText(MainActivity.this, "Permission is Required!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                        permissionToken.continuePermissionRequest();
+                    }
+                }).check();
     }
 
     @SuppressLint("QueryPermissionsNeeded")
